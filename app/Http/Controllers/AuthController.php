@@ -15,10 +15,15 @@ class AuthController extends Controller
         $validacion = Validator::make(
             $request->all(), 
             [
+                'nombre' => 'required|string|min:2|max:20',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6'
             ],
             [
+                'nombre.required' => 'El nombre es requerido',
+                'nombre.min' => 'El nombre debe tener al menos 2 caracteres',
+                'nombre.max' => 'El nombre debe tener máximo 20 caracteres',
+
                 'email.required' => 'El email es requerido',
                 'email.email' => 'El email no es válido',
                 'email.unique' => 'El email ya está registrado',
@@ -39,15 +44,12 @@ class AuthController extends Controller
         try
         {
             $user = User::create([
+                'nombre' => $request->nombre,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
     
-            return response()->json([
-                'status' => 200,
-                'data' => $user,
-                'errors' => []
-            ], 200);
+            return $user;
         }
 
         catch (Exception $e)
@@ -65,10 +67,15 @@ class AuthController extends Controller
         $validacion = Validator::make(
             $request->all(), 
             [
+                'nombre' => 'required|string|min:2|max:20',
                 'email' => 'required|string|email|max:255',
                 'password' => 'required|string|min:6'
             ],
             [
+                'nombre.required' => 'El nombre es requerido',
+                'nombre.min' => 'El nombre debe tener al menos 2 caracteres',
+                'nombre.max' => 'El nombre debe tener máximo 20 caracteres',
+
                 'email.required' => 'El email es requerido',
                 'email.email' => 'El email no es válido',
 
