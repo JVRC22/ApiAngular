@@ -33,6 +33,7 @@ class AuthController extends Controller
             ]
         );
 
+
         if ($validacion->fails()) {
             return response()->json([
                 'status' => 422,

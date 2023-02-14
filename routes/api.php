@@ -19,4 +19,4 @@ Route::prefix('/personas')->group(function() {
     Route::delete('/{id}', [PersonasController::class, 'eliminar']);
     Route::get('/', [PersonasController::class, 'mostrar']);
     Route::get('mostrar/{id}', [PersonasController::class, 'mostrarUnico']);
-});
+}); 
