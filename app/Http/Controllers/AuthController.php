@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class AuthController extends Controller
 {
@@ -166,13 +167,7 @@ class AuthController extends Controller
             $user = User::find($id);
 
             if ($user) {
-                if ($user->rol == 1) {
-                    return true;
-                }
-
-                else {
-                    return false;
-                }
+                return $user->rol;
             }
         }
 
