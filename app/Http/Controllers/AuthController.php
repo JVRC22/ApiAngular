@@ -174,8 +174,6 @@ class AuthController extends Controller
         catch (Exception $e)
         {
             return response()->json([
-                'status' => 500,
-                'data' => [],
                 'errors' => 'Error al mostrar el usuario'
             ], 500);
         }
