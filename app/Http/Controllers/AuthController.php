@@ -139,4 +139,50 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+    public function mostrar()
+    {
+        try
+        {
+            $users = User::all();
+
+            return $users;
+        }
+
+        catch (Exception $e)
+        {
+            return response()->json([
+                'status' => 500,
+                'data' => [],
+                'errors' => 'Error al mostrar los usuarios'
+            ], 500);
+        }
+    }
+
+    public function isAdmin($id)
+    {
+        try
+        {
+            $user = User::find($id);
+
+            if ($user) {
+                if ($user->rol == 1) {
+                    return true;
+                }
+
+                else {
+                    return false;
+                }
+            }
+        }
+
+        catch (Exception $e)
+        {
+            return response()->json([
+                'status' => 500,
+                'data' => [],
+                'errors' => 'Error al mostrar el usuario'
+            ], 500);
+        }
+    }
 }

@@ -12,6 +12,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'registrarse']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('mostrar', [AuthController::class, 'mostrar']);
+Route::get('isAdmin', [AuthController::class, 'isAdmin']);
 
 Route::prefix('/personas')->group(function() {
     Route::post('/', [PersonasController::class, 'agregar']);
