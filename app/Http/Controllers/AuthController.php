@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class AuthController extends Controller
 {
@@ -137,6 +138,44 @@ class AuthController extends Controller
                 'status' => 500,
                 'data' => [],
                 'errors' => 'Error al cerrar sesión'
+            ], 500);
+        }
+    }
+
+    public function mostrar()
+    {
+        try
+        {
+            $users = User::all();
+
+            return $users;
+        }
+
+        catch (Exception $e)
+        {
+            return response()->json([
+                'status' => 500,
+                'data' => [],
+                'errors' => 'Error al mostrar los usuarios'
+            ], 500);
+        }
+    }
+
+    public function isAdmin($id)
+    {
+        try
+        {
+            $user = User::find($id);
+
+            if ($user) {
+                return $user->rol;
+            }
+        }
+
+        catch (Exception $e)
+        {
+            return response()->json([
+                'errors' => 'Error al mostrar el usuario'
             ], 500);
         }
     }
