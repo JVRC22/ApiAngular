@@ -67,15 +67,10 @@ class AuthController extends Controller
         $validacion = Validator::make(
             $request->all(), 
             [
-                'nombre' => 'required|string|min:2|max:20',
                 'email' => 'required|string|email|max:255',
                 'password' => 'required|string|min:6'
             ],
             [
-                'nombre.required' => 'El nombre es requerido',
-                'nombre.min' => 'El nombre debe tener al menos 2 caracteres',
-                'nombre.max' => 'El nombre debe tener máximo 20 caracteres',
-
                 'email.required' => 'El email es requerido',
                 'email.email' => 'El email no es válido',
 
@@ -107,12 +102,8 @@ class AuthController extends Controller
             $token = $user->createToken('token')->plainTextToken;
 
             return response()->json([
-                'status' => 200,
-                'data' => [
-                    'user' => $user,
-                    'token' => $token
-                ],
-                'errors' => []
+                'user' => $user,
+                'token' => $token
             ], 200);
         }
 
